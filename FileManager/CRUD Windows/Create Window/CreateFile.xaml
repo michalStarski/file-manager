@@ -1,0 +1,17 @@
+﻿<Window x:Class="FileManager.CRUD_Windows.Create_Window.CreateFile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileManager.CRUD_Windows.Create_Window"
+        mc:Ignorable="d"
+        Title="Create a File" Height="200" Width="300">
+    <Grid Background="#FF1E2127">
+        <TextBox Name="CreatePath" HorizontalAlignment="Left" Height="23" Margin="10,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238"/>
+        <Label Content="Please specify a path:" Padding="0" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="272" Height="17" Foreground="#FF98C379"/>
+        <RadioButton x:Name="DirectoryCheck" Content="Directory" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top" Foreground="#FF61AFEF"/>
+        <RadioButton x:Name="FileCheck" Content="File" HorizontalAlignment="Left" Margin="215,83,0,0" VerticalAlignment="Top" Width="67" Foreground="#FF61AFEF"/>
+        <Button Name="createButton" Content="Create" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FFABB2BF" Background="{x:Null}" FontStyle="Italic" Foreground="#FFABB2BF" Click="CreateAFile"/>
+
+    </Grid>
+</Window>

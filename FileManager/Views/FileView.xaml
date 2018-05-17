@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="FileManager.Views.FileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FileManager.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="35" d:DesignWidth="300">
+    <Grid PreviewMouseDown="fileClicked">
+        <TextBlock Name="filename" HorizontalAlignment="Left" Margin="0,10,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="75" TextAlignment="Center" Foreground="#FFABB2BF"/>
+        <TextBlock Name="filedate" HorizontalAlignment="Left" Margin="225,10,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Width="75" TextAlignment="Right" Foreground="#FF98C379"/>
+        <TextBlock Name="filesize" HorizontalAlignment="Left" Margin="150,10,0,0" TextWrapping="Wrap" Text="Size" VerticalAlignment="Top" Width="75" TextAlignment="Center" Foreground="#FF98C379"/>
+        <TextBlock Name="filetype" HorizontalAlignment="Left" Margin="75,10,0,0" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Width="75" TextAlignment="Center" Foreground="#FFABB2BF"/>
+    </Grid>
+</UserControl>

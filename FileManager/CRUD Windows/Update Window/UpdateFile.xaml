@@ -1,0 +1,18 @@
+﻿<Window x:Class="FileManager.CRUD_Windows.Update_Window.UpdateFile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileManager.CRUD_Windows.Update_Window"
+        mc:Ignorable="d"
+        Title="Update a File" Height="200" Width="300">
+    <Grid Background="#1E2127 ">
+        <RadioButton Name="CopyFile" Content="Copy" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#C678DD"/>
+        <RadioButton Name="MoveFile" Content="Move" HorizontalAlignment="Left" Margin="92,10,0,0" VerticalAlignment="Top" Foreground="#C678DD"/>
+        <TextBox Name="From" HorizontalAlignment="Left" Height="23" Margin="10,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="218"/>
+        <TextBox Name="To" HorizontalAlignment="Left" Height="23" Margin="10,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="218"/>
+        <Label Content="From" Foreground="#ABB2BF" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.07,0.179"/>
+        <Label Content="To" Foreground="#ABB2BF" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.07,0.179"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#E06C75" Foreground="#E06C75" Background="{x:Null}" Click="Button_Click"/>
+    </Grid>
+</Window>

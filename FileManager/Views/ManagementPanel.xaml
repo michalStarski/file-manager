@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="FileManager.Views.ManagementPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FileManager.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="207">
+    <Grid>
+        <Button Name="CreateButton" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Top" Width="207" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="CreateFile" BorderBrush="{x:Null}"/>
+        <Button Name="UpdateButton" Content="Update" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Width="207" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="UpdateFile" BorderBrush="{x:Null}"/>
+        <Button Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="207" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="DeleteFile" BorderBrush="{x:Null}"/>
+
+    </Grid>
+</UserControl>
