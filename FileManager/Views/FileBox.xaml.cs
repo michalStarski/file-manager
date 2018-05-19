@@ -21,12 +21,13 @@ using System.Windows.Shapes;
 namespace FileManager.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy FileBox.xaml
+    /// Logic for FileBox.xaml
     /// </summary>
     public partial class FileBox : UserControl
     {
         public string currentPath;
         public string currentSelectedItem;
+        public string currentSelectedItemType;
 
         private List<IDiscElement> currentList;
 
@@ -43,6 +44,8 @@ namespace FileManager.Views
 
             InitializeComponent();
             GetDrives();
+            //Delete Event
+            ManagementPanel.DeleteFileEvent += FileDeleteOperation;
         }
 
         private void OnChanged(object source, FileSystemEventArgs e)
@@ -87,10 +90,6 @@ namespace FileManager.Views
             watcher.Renamed += new RenamedEventHandler(OnRenamed);
 
             watcher.EnableRaisingEvents = true;
-
-            //Create, Delete Events
-            ManagementPanel.CreateFileEvent += InvokeCreateFileWindow;
-            ManagementPanel.DeleteFileEvent += FileDeleteOperation;
 
             //Create an DirectoryInfo object to extract child files from it
             DirectoryInfo d = new DirectoryInfo(path);
@@ -193,9 +192,15 @@ namespace FileManager.Views
             try
             {
                 if (selectedItem.file is MyDirectory)
+                {
                     currentSelectedItem = (selectedItem.file as MyDirectory).Name;
+                    currentSelectedItemType = "dir";
+                }
                 else
+                {
                     currentSelectedItem = (selectedItem.file as MyFile).Name;
+                    currentSelectedItemType = "file";
+                }
             }
             catch
             {
@@ -219,14 +224,9 @@ namespace FileManager.Views
         }
  
         /// <summary>
-        /// Opens a create file window
+        /// Deletes a file
         /// </summary>
 
-        private void InvokeCreateFileWindow()
-        {
-            CreateFile CreateWindow = new CreateFile(currentPath);
-            CreateWindow.Show();
-        }
         private void FileDeleteOperation()
         {
             FileView toDelete = (FileList.SelectedItem as FileView);
@@ -238,11 +238,15 @@ namespace FileManager.Views
                 }
                 else if (toDelete.file is MyDirectory)
                 {
-                    File.Delete((toDelete.file as MyDirectory).Path);
+                    Directory.Delete((toDelete.file as MyDirectory).Path);
                 }
                 MessageBox.Show("Deleted");
 
-            }catch(Exception e)
+            }catch(NullReferenceException nEx)
+            {
+                return;
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }

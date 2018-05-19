@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\micha\Desktop\development\FileManager\FileManager\obj\Debug\
+j:\Desktop\R01S02\pob\file-reader\FileManager\obj\Debug\
 FileManager
 none
 false
 DEBUG;TRACE
-C:\Users\micha\Desktop\development\FileManager\FileManager\App.xaml
+j:\Desktop\R01S02\pob\file-reader\FileManager\App.xaml
 6234900103
 
-201434985760
+20-865890103
 131569487696
 CRUD Windows\Create Window\CreateFile.xaml;CRUD Windows\Update Window\UpdateFile.xaml;MainWindow.xaml;Views\FileBox.xaml;Views\FileView.xaml;Views\ManagementPanel.xaml;
 

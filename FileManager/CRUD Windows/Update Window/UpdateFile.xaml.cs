@@ -21,11 +21,13 @@ namespace FileManager.CRUD_Windows.Update_Window
     /// </summary>
     public partial class UpdateFile : Window
     {
-        public UpdateFile(string fromPath, string toPath, string fromElement, string toElement)
+        string fileType;
+        public UpdateFile(string fromPath, string toPath, string fromElement, string toElement, string type)
         {
             InitializeComponent();
             From.Text = fromPath + @"\" + fromElement;
             To.Text = toPath + @"\" + toElement;
+            this.fileType = type;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,10 @@ namespace FileManager.CRUD_Windows.Update_Window
             {
                 try
                 {
-                    File.Copy(From.Text, To.Text);
+                    if (fileType == "file")
+                        File.Copy(From.Text, To.Text);
+                    else
+                        DirectoryCopy(From.Text, To.Text, true);
 
                 }catch(Exception ex)
                 {
@@ -46,7 +51,10 @@ namespace FileManager.CRUD_Windows.Update_Window
             {
                 try
                 {
-                    File.Move(From.Text, To.Text);
+                    if (fileType == "file")
+                        File.Move(From.Text, To.Text);
+                    else
+                        Directory.Move(From.Text, To.Text);
 
                 }catch(Exception ex)
                 {
@@ -59,5 +67,44 @@ namespace FileManager.CRUD_Windows.Update_Window
                 MessageBox.Show("Please specify an operation");
             }
         }
+
+        private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            // Get the subdirectories for the specified directory.
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            // If the destination directory doesn't exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = System.IO.Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            // If copying subdirectories, copy them and their contents to new location.
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = System.IO.Path.Combine(destDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
+        }
     }
 }
+

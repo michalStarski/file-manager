@@ -1,4 +1,5 @@
-﻿using FileManager.CRUD_Windows.Update_Window;
+﻿using FileManager.CRUD_Windows.Create_Window;
+using FileManager.CRUD_Windows.Update_Window;
 using FileManager.Views;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,18 @@ using System.Windows.Shapes;
 namespace FileManager
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            //Update file event
+            //Create, Update Events
             ManagementPanel.UpdateFileEvent += InvokeUpdateFileWindow;
+            ManagementPanel.CreateFileEvent += InvokeCreateFileWindow;
+
+
             LeftPanel.PreviewEvent += PreviewElement;
         }
         /// <summary>
@@ -35,8 +39,19 @@ namespace FileManager
         /// </summary>
         private void InvokeUpdateFileWindow()
         {
-            UpdateFile UpdateWindow = new UpdateFile(LeftPanel.currentPath, RightPanel.currentPath, LeftPanel.currentSelectedItem, RightPanel.currentSelectedItem);
+            UpdateFile UpdateWindow = new UpdateFile(LeftPanel.currentPath, RightPanel.currentPath, LeftPanel.currentSelectedItem, RightPanel.currentSelectedItem, LeftPanel.currentSelectedItemType);
             UpdateWindow.Show();
+        }
+
+
+        /// <summary>
+        /// Opens a create file window
+        /// </summary>
+
+        private void InvokeCreateFileWindow()
+        {
+            CreateFile CreateWindow = new CreateFile(LeftPanel.currentPath);
+            CreateWindow.Show();
         }
 
         /// <summary>

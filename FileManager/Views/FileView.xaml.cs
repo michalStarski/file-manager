@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace FileManager.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy FileView.xaml
+    /// Logic for FileView.xaml
     /// </summary>
     public partial class FileView : UserControl
     {
@@ -35,6 +35,7 @@ namespace FileManager.Views
                 filedate.Text = file.GetCreationDate().ToString();
                 filesize.Text = file.Size.ToString();
                 filetype.Text = @"<FILE>";
+                filetype.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E06C75"));
             }
             else if(element is MyDirectory)
             {
@@ -44,6 +45,7 @@ namespace FileManager.Views
                 filedate.Text = directory.GetCreationDate().ToString();
                 filesize.Text = "--";
                 filetype.Text = @"<DIR>";
+                filetype.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD19A66"));
             }
         }
         /// <summary>

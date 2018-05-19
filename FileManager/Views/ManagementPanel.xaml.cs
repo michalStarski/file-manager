@@ -16,15 +16,15 @@ using System.Windows.Shapes;
 namespace FileManager.Views
 {
     /// <summary>
-    /// Logika dla klasy ManagementPanel.xaml
+    /// Logic for ManagementPanel.xaml
     /// </summary>
     public partial class ManagementPanel : UserControl
     {
+
         public ManagementPanel()
         {
             InitializeComponent();
         }
-
         //Events are being invoked on management panel's button click
 
         //Create a file Event 
@@ -39,11 +39,14 @@ namespace FileManager.Views
         public delegate void UpdateAFile();
         public static event UpdateAFile UpdateFileEvent;
 
+
         //Invoking methods
         private void CreateFile(object sender, RoutedEventArgs e)
         {
             if (CreateFileEvent != null)
+            {
                 CreateFileEvent.Invoke();
+            }
         }
 
         private void DeleteFile(object sender, RoutedEventArgs e)
