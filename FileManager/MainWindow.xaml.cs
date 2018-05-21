@@ -24,6 +24,12 @@ namespace FileManager
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public delegate void F3Pressed();
+        public static event F3Pressed F3PressedEvent;
+
+        public static string currentPath;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -50,7 +56,7 @@ namespace FileManager
 
         private void InvokeCreateFileWindow()
         {
-            CreateFile CreateWindow = new CreateFile(LeftPanel.currentPath);
+            CreateFile CreateWindow = new CreateFile(currentPath);
             CreateWindow.Show();
         }
 
@@ -87,6 +93,19 @@ namespace FileManager
                 string content = File.ReadAllText(source);
                 textPreview.AppendText(content);
                 Preview.Children.Add(textPreview);
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (String.Equals(e.Key.ToString(), "F1"))
+                InvokeCreateFileWindow();
+            else if (String.Equals(e.Key.ToString(), "F2"))
+                InvokeUpdateFileWindow();
+            else if (String.Equals(e.Key.ToString(), "F3"))
+            {
+                if (F3PressedEvent != null)
+                    F3PressedEvent.Invoke();
             }
         }
     }

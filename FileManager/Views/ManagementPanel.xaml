@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FileManager.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="207">
+             d:DesignHeight="450" d:DesignWidth="1339.5">
     <Grid>
-        <Button Name="CreateButton" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Top" Width="207" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="CreateFile" BorderBrush="{x:Null}"/>
-        <Button Name="UpdateButton" Content="Update" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Width="207" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="UpdateFile" BorderBrush="{x:Null}"/>
-        <Button Name="DeleteButton" Content="Delete" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="207" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="DeleteFile" BorderBrush="{x:Null}"/>
+        <Button Name="CreateButton" Content="[F1] Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="207" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="CreateFile" BorderBrush="{x:Null}" Margin="0,0,0,0"/>
+        <Button Name="UpdateButton" Content="[F2] Update" HorizontalAlignment="Center" Margin="0,0" VerticalAlignment="Top" Width="208" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="UpdateFile" BorderBrush="{x:Null}"/>
+        <Button Name="DeleteButton" Content="[F3] Delete" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Width="208" Background="{x:Null}" Foreground="#E06C75" FontSize="25px" Click="DeleteFile" BorderBrush="{x:Null}"/>
 
     </Grid>
 </UserControl>

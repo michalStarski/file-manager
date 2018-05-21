@@ -6,17 +6,18 @@
         xmlns:local="clr-namespace:FileManager"
         xmlns:Views="clr-namespace:FileManager.Views" x:Class="FileManager.MainWindow"
         mc:Ignorable="d"
-        Title="File Manager" Height="600" Width="1339.5" Background="#1E2127" VerticalAlignment="Center" HorizontalAlignment="Center">
-    <Grid VerticalAlignment="Center">
-    <Grid Background="#1E2127" HorizontalAlignment="Left" VerticalAlignment="Center" Height="518" Margin="0,0,0,1" Width="866">
+        Title="File Manager" Height="622.5" Width="1365.5" Background="#1E2127" VerticalAlignment="Center" HorizontalAlignment="Center"
+        KeyDown="Window_KeyDown">
+    <Grid>
 
-        <Views:FileBox x:Name="LeftPanel" HorizontalAlignment="Left" Height="450" Margin="0,45,0,0" VerticalAlignment="Top" Width="340"/>
-        <Views:FileBox x:Name="RightPanel" HorizontalAlignment="Left" Height="450" Margin="508,45,0,0" VerticalAlignment="Top" Width="340"/>
-        <Views:ManagementPanel HorizontalAlignment="Left" Height="450" Margin="345,45,0,0" VerticalAlignment="Top" Width="152"/>
-        <Grid Name="Preview" HorizontalAlignment="Left" Height="438" Margin="878,57,-396,0" VerticalAlignment="Top" Width="384">
-            <Label Name="NotAvailable" Content="Preview Not Available" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontSize="15px" Foreground="#ABB2BF"/>
-        </Grid>
-        <Label Content="Preview" HorizontalAlignment="Left" Margin="878,14,-112,0" VerticalAlignment="Top" Width="100" FontSize="25px" Foreground="#61AFEF"/>
+        <Grid Background="#1E2127" HorizontalAlignment="Center" VerticalAlignment="Center" Height="591" Width="1332">
+            <Views:FileBox x:Name="LeftPanel" HorizontalAlignment="Left" Height="450" Margin="0,45,0,0" VerticalAlignment="Top" Width="340"/>
+            <Views:FileBox x:Name="RightPanel" HorizontalAlignment="Left" Height="450" Margin="508,45,0,0" VerticalAlignment="Top" Width="340"/>
+            <Views:ManagementPanel HorizontalAlignment="Left" Height="40" Margin="0,518,0,0" VerticalAlignment="Top" Width="1332"/>
+            <Grid Name="Preview" HorizontalAlignment="Left" Height="438" Margin="878,57,-396,0" VerticalAlignment="Top" Width="384">
+                <Label Name="NotAvailable" Content="Preview Not Available" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontSize="15px" Foreground="#ABB2BF"/>
+            </Grid>
+            <Label Content="Preview" HorizontalAlignment="Left" Margin="878,14,-112,0" VerticalAlignment="Top" Width="100" FontSize="25px" Foreground="#61AFEF"/>
         </Grid>
     </Grid>
 </Window>

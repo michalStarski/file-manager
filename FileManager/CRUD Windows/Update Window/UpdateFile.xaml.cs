@@ -40,6 +40,7 @@ namespace FileManager.CRUD_Windows.Update_Window
                         File.Copy(From.Text, To.Text);
                     else
                         DirectoryCopy(From.Text, To.Text, true);
+                    this.Close();
 
                 }catch(Exception ex)
                 {
@@ -55,6 +56,7 @@ namespace FileManager.CRUD_Windows.Update_Window
                         File.Move(From.Text, To.Text);
                     else
                         Directory.Move(From.Text, To.Text);
+                    this.Close();
 
                 }catch(Exception ex)
                 {

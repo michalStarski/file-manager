@@ -46,6 +46,7 @@ namespace FileManager.Views
             GetDrives();
             //Delete Event
             ManagementPanel.DeleteFileEvent += FileDeleteOperation;
+            MainWindow.F3PressedEvent += FileDeleteOperation;
         }
 
         private void OnChanged(object source, FileSystemEventArgs e)
@@ -81,15 +82,21 @@ namespace FileManager.Views
             currentPath = path;
             CurrentPath.Text = path;
 
-            //Initialize FileWatcher
-            FileSystemWatcher watcher = new FileSystemWatcher();
-            watcher.Path = currentPath;
-            watcher.Changed += new FileSystemEventHandler(OnChanged);
-            watcher.Created += new FileSystemEventHandler(OnChanged);
-            watcher.Deleted += new FileSystemEventHandler(OnChanged);
-            watcher.Renamed += new RenamedEventHandler(OnRenamed);
+            try
+            {
+                //Initialize FileWatcher
+                FileSystemWatcher watcher = new FileSystemWatcher();
+                watcher.Path = currentPath;
+                watcher.Changed += new FileSystemEventHandler(OnChanged);
+                watcher.Created += new FileSystemEventHandler(OnChanged);
+                watcher.Deleted += new FileSystemEventHandler(OnChanged);
+                watcher.Renamed += new RenamedEventHandler(OnRenamed);
 
-            watcher.EnableRaisingEvents = true;
+                watcher.EnableRaisingEvents = true;
+            } catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
 
             //Create an DirectoryInfo object to extract child files from it
             DirectoryInfo d = new DirectoryInfo(path);
@@ -195,11 +202,13 @@ namespace FileManager.Views
                 {
                     currentSelectedItem = (selectedItem.file as MyDirectory).Name;
                     currentSelectedItemType = "dir";
+                    MainWindow.currentPath = (selectedItem.file as MyDirectory).Path;
                 }
                 else
                 {
                     currentSelectedItem = (selectedItem.file as MyFile).Name;
                     currentSelectedItemType = "file";
+                    MainWindow.currentPath = (selectedItem.file as MyFile).Path;
                 }
             }
             catch
@@ -262,21 +271,27 @@ namespace FileManager.Views
             List<IDiscElement> sortedByName = currentList;
             //Application has 3 sorted by date states - name, nameReversed and default
             //States switches if different type of sort is chosen
-            switch (nameSorted)
+            try
             {
-                case "default":
-                    sortedByName.Sort(myNameComparer);
-                    nameSorted = "name";
-                    break;
-                case "name":
-                    sortedByName.Sort(myNameComparer);
-                    sortedByName.Reverse();
-                    nameSorted = "nameReversed";
-                    break;
-                case "nameReversed":
-                    DisplayFiles(currentPath);
-                    nameSorted = "default";
-                    return;
+                switch (nameSorted)
+                {
+                    case "default":
+                        sortedByName.Sort(myNameComparer);
+                        nameSorted = "name";
+                        break;
+                    case "name":
+                        sortedByName.Sort(myNameComparer);
+                        sortedByName.Reverse();
+                        nameSorted = "nameReversed";
+                        break;
+                    case "nameReversed":
+                        DisplayFiles(currentPath);
+                        nameSorted = "default";
+                        return;
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             try
             {
@@ -298,7 +313,11 @@ namespace FileManager.Views
             {
                 //Error Box
                 MessageBox.Show(ex.ToString());
-                DisplayFiles(DriveList.SelectedItem.ToString());
+                try
+                {
+                    DisplayFiles(DriveList.SelectedItem.ToString());
+                }
+                catch{}
                 return;
             }
         }
@@ -316,21 +335,28 @@ namespace FileManager.Views
             List<IDiscElement> sortedByDate = currentList;
             //Application has 3 sorted by date states - date, dateReversed and default
             //State switches if different type of sort is chosen
-            switch (dateSorted)
+            try
             {
-                case "default":
-                    sortedByDate.Sort(myDateComparer);
-                    dateSorted = "date";
-                    break;
-                case "date":
-                    sortedByDate.Sort(myDateComparer);
-                    sortedByDate.Reverse();
-                    dateSorted = "dateReversed";
-                    break;
-                case "dateReversed":
-                    DisplayFiles(currentPath);
-                    dateSorted = "default";
-                    return;
+                switch (dateSorted)
+                {
+                    case "default":
+                        sortedByDate.Sort(myDateComparer);
+                        dateSorted = "date";
+                        break;
+                    case "date":
+                        sortedByDate.Sort(myDateComparer);
+                        sortedByDate.Reverse();
+                        dateSorted = "dateReversed";
+                        break;
+                    case "dateReversed":
+                        DisplayFiles(currentPath);
+                        dateSorted = "default";
+                        return;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             try
             {
@@ -352,7 +378,11 @@ namespace FileManager.Views
             {
                 //Error Box
                 MessageBox.Show(ex.ToString());
-                DisplayFiles(DriveList.SelectedItem.ToString());
+                try
+                {
+                    DisplayFiles(DriveList.SelectedItem.ToString());
+                }
+                catch { }
                 return;
             }
         }
@@ -361,7 +391,7 @@ namespace FileManager.Views
         {
             FileList.Items.Clear();
 
-            if(String.Compare(SearchBox.Text, "") == 0)
+            if(String.Compare(SearchBox.Text, "", true) == 0)
             {
                 DisplayFiles(currentPath);
             }
