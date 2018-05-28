@@ -49,6 +49,36 @@ namespace FileManager.Views
             MainWindow.F3PressedEvent += FileDeleteOperation;
         }
 
+
+        private void Iterate(List<IDiscElement> directoryElements)
+        {
+            //Iterate in directory
+            try
+            {
+                foreach (IDiscElement element in directoryElements)
+                {
+                    //For each element create an view to describe it
+                    FileView display = new FileView(element);
+                    //Subscribing to an event, if invoked execute FileView_DisplayFilesEvent;
+                    display.DirectoryOpenedEvent += FileView_DisplayFilesEvent;
+                    //File open on doubleclick
+                    display.FileOpenedEvent += FileView_OpenFileEvent;
+                    //File Preview event
+                    display.FilePreviewedEvent += FileView_PreviewFile;
+                    //And add it to the list
+                    FileList.Items.Add(display);
+                }
+
+            }
+            catch (Exception e)
+            {
+                //Error Box
+                MessageBox.Show(e.ToString());
+                DisplayFiles(DriveList.SelectedItem.ToString());
+                return;
+            }
+        }
+
         private void OnChanged(object source, FileSystemEventArgs e)
         {
             // Specify what is done when a file is changed, created, or deleted.
@@ -102,31 +132,9 @@ namespace FileManager.Views
             DirectoryInfo d = new DirectoryInfo(path);
             MyDirectory directory = new MyDirectory(d.Name, d.FullName);
             currentList = directory.GetSubElements();
-            //Iterate in directory
-            try
-            {
-                foreach (IDiscElement element in directory.GetSubElements()) 
-                {
-                    //For each element create an view to describe it
-                    FileView display = new FileView(element);
-                    //Subscribing to an event, if invoked execute FileView_DisplayFilesEvent;
-                    display.DirectoryOpenedEvent += FileView_DisplayFilesEvent;
-                    //File open on doubleclick
-                    display.FileOpenedEvent += FileView_OpenFileEvent;
-                    //File Preview event
-                    display.FilePreviewedEvent += FileView_PreviewFile;
-                    //And add it to the list
-                    FileList.Items.Add(display);
-                }
 
-            }
-            catch(Exception e)
-            {
-                //Error Box
-                MessageBox.Show(e.ToString());
-                DisplayFiles(DriveList.SelectedItem.ToString());
-                return;
-            }
+            Iterate(directory.GetSubElements());
+
         }
 
 
@@ -293,33 +301,7 @@ namespace FileManager.Views
             {
                 MessageBox.Show(ex.Message);
             }
-            try
-            {
-                foreach (IDiscElement element in sortedByName)
-                {
-                    //For each element create an view to describe it
-                    FileView display = new FileView(element);
-                    //Subscribing to an event, if invoked execute FileView_DisplayFilesEvent;
-                    display.DirectoryOpenedEvent += FileView_DisplayFilesEvent;
-                    //File open on doubleclick
-                    display.FileOpenedEvent += FileView_OpenFileEvent;
-                    //File Preview event
-                    display.FilePreviewedEvent += FileView_PreviewFile;
-                    //And add it to the list
-                    FileList.Items.Add(display);
-                }
-            }
-            catch (Exception ex)
-            {
-                //Error Box
-                MessageBox.Show(ex.ToString());
-                try
-                {
-                    DisplayFiles(DriveList.SelectedItem.ToString());
-                }
-                catch{}
-                return;
-            }
+            Iterate(sortedByName);
         }
         /// <summary>
         /// Sorts files by Date on button click
@@ -358,33 +340,7 @@ namespace FileManager.Views
             {
                 MessageBox.Show(ex.Message);
             }
-            try
-            {
-                foreach (IDiscElement element in sortedByDate)
-                {
-                    //For each element create an view to describe it
-                    FileView display = new FileView(element);
-                    //Subscribing to an event, if invoked execute FileView_DisplayFilesEvent;
-                    display.DirectoryOpenedEvent += FileView_DisplayFilesEvent;
-                    //File open on doubleclick
-                    display.FileOpenedEvent += FileView_OpenFileEvent;
-                    //File Preview event
-                    display.FilePreviewedEvent += FileView_PreviewFile;
-                    //And add it to the list
-                    FileList.Items.Add(display);
-                }
-            }
-            catch (Exception ex)
-            {
-                //Error Box
-                MessageBox.Show(ex.ToString());
-                try
-                {
-                    DisplayFiles(DriveList.SelectedItem.ToString());
-                }
-                catch { }
-                return;
-            }
+            Iterate(sortedByDate);
         }
 
         private void Search(object sender, RoutedEventArgs e)
@@ -396,28 +352,7 @@ namespace FileManager.Views
                 DisplayFiles(currentPath);
             }
             List<IDiscElement> fileList = currentList.Where(element => element.Name.Contains(SearchBox.Text)).ToList();
-            try
-            {
-                foreach (IDiscElement element in fileList)
-                {
-                    //For each element create an view to describe it
-                    FileView display = new FileView(element);
-                    //Subscribing to an event, if invoked execute FileView_DisplayFilesEvent;
-                    display.DirectoryOpenedEvent += FileView_DisplayFilesEvent;
-                    //File open on doubleclick
-                    display.FileOpenedEvent += FileView_OpenFileEvent;
-                    //File Preview event
-                    display.FilePreviewedEvent += FileView_PreviewFile;
-                    //And add it to the list
-                    FileList.Items.Add(display);
-                }
-            }catch(Exception ex)
-            {
-                //Error Box
-                MessageBox.Show(ex.ToString());
-                DisplayFiles(DriveList.SelectedItem.ToString());
-                return;
-            }
+            Iterate(fileList);
         }
     }
 }
